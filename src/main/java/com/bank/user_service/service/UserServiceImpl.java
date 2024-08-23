@@ -1,8 +1,11 @@
 package com.bank.user_service.service;
 
 import com.bank.user_service.dto.Account;
+import com.bank.user_service.dto.Loan;
 import com.bank.user_service.entity.User;
 import com.bank.user_service.external.service.AccountService;
+import com.bank.user_service.external.service.CardService;
+import com.bank.user_service.external.service.LoanService;
 import com.bank.user_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
@@ -18,6 +21,12 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private LoanService loanService;
+
+    @Autowired
+    private CardService cardService;
     @Override
     public User openAccount(User user) {
         User newUser = userRepository.save(user);
@@ -38,7 +47,9 @@ public class UserServiceImpl implements UserService{
 
     public User getUserByID(Long id){
         User user = userRepository.findById(id).orElse(null);
-//       user.setAccounts(accountService.getAccountById(id).getBody());
+        user.setAccounts(accountService.getAccountById(user.getId()));
+        user.setLoans(loanService.getLoansByUserId(id));
+        user.setCards(cardService.getCardsByUserId(id));
        return user;
     }
 

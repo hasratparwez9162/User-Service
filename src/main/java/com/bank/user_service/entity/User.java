@@ -1,5 +1,7 @@
 package com.bank.user_service.entity;
 import com.bank.user_service.dto.Account;
+import com.bank.user_service.dto.Card;
+import com.bank.user_service.dto.Loan;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,4 +34,8 @@ public class User {
     private LocalDateTime modifiedAt;
     @Transient
     private List<Account> accounts;
+    @Transient
+    private List<Loan> loans;
+    @Transient
+    private List<Card> cards;
 }

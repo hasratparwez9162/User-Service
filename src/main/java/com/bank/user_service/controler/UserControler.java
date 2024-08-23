@@ -29,7 +29,6 @@ public class UserControler {
     @GetMapping("/user/{id}")
     public ResponseEntity<User> getUserById (@PathVariable Long id){
         User user = userService.getUserByID(id);
-        user.setAccounts(accountService.getAccountById(user.getId()));
         return new ResponseEntity<>(user,HttpStatus.FOUND);
     }
 }
