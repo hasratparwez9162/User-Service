@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/users")
 public class UserControler {
 
     @Autowired
