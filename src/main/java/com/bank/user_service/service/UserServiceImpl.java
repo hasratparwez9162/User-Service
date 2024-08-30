@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService{
       return   userRepository.save(newUser);
     }
 
-
+    @Override
     public User getUserByID(Long id){
         User user = userRepository.findById(id).orElse(null);
         user.setAccounts(accountService.getAccountById(user.getId()));
@@ -52,19 +52,28 @@ public class UserServiceImpl implements UserService{
         user.setCards(cardService.getCardsByUserId(id));
        return user;
     }
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+    @Override
     public User updateUser(Long id, User userDetails) {
         User existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         existingUser.setFirstName(userDetails.getFirstName());
         existingUser.setLastName(userDetails.getLastName());
         existingUser.setEmail(userDetails.getEmail());
         existingUser.setPhoneNumber(userDetails.getPhoneNumber());
-        // Update other fields as needed
+        existingUser.setAlternatePhoneNumber(userDetails.getAlternatePhoneNumber());
+        existingUser.setAddress(userDetails.getAddress());
+        existingUser.setState(userDetails.getState());
         return userRepository.save(existingUser);
     }
     // Delete user by ID
+    @Override
     public void deleteUser(Long id) {
         User existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         userRepository.delete(existingUser);
     }
+
 
 }
