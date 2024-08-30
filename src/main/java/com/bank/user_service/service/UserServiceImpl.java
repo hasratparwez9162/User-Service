@@ -52,5 +52,19 @@ public class UserServiceImpl implements UserService{
         user.setCards(cardService.getCardsByUserId(id));
        return user;
     }
+    public User updateUser(Long id, User userDetails) {
+        User existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        existingUser.setFirstName(userDetails.getFirstName());
+        existingUser.setLastName(userDetails.getLastName());
+        existingUser.setEmail(userDetails.getEmail());
+        existingUser.setPhoneNumber(userDetails.getPhoneNumber());
+        // Update other fields as needed
+        return userRepository.save(existingUser);
+    }
+    // Delete user by ID
+    public void deleteUser(Long id) {
+        User existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        userRepository.delete(existingUser);
+    }
 
 }
