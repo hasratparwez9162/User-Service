@@ -1,6 +1,6 @@
 package com.bank.user_service.controler;
 
-import com.bank.user_service.dto.Account;
+
 import com.bank.user_service.entity.User;
 import com.bank.user_service.external.service.AccountService;
 import com.bank.user_service.service.UserServiceImpl;
@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
+
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/users")

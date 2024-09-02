@@ -25,7 +25,9 @@ public class User {
     private String gender;
     private String address;
     private String state;
+    @Column(unique = true)
     private String email;
+    @Column(unique = true)
     private String phoneNumber;
     private String alternatePhoneNumber;
     @CreationTimestamp
