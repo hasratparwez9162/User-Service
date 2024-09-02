@@ -3,6 +3,7 @@ package com.bank.user_service.service;
 import com.bank.user_service.dto.Account;
 import com.bank.user_service.dto.Loan;
 import com.bank.user_service.entity.User;
+import com.bank.user_service.exception.UserNotFoundException;
 import com.bank.user_service.external.service.AccountService;
 import com.bank.user_service.external.service.CardService;
 import com.bank.user_service.external.service.LoanService;
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUserByID(Long id){
-        User user = userRepository.findById(id).orElse(null);
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User with ID " + id + " not found"));;
         user.setAccounts(accountService.getAccountById(user.getId()));
         user.setLoans(loanService.getLoansByUserId(id));
         user.setCards(cardService.getCardsByUserId(id));
