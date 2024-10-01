@@ -3,7 +3,7 @@ package com.bank.user_service.controler;
 
 import com.bank.user_service.entity.User;
 import com.bank.user_service.external.service.AccountService;
-import com.bank.user_service.service.UserServiceImpl;
+import com.bank.user_service.serviceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +33,12 @@ public class UserControler {
         User user = userService.getUserByID(id);
         return new ResponseEntity<>(user,HttpStatus.FOUND);
     }
+    @GetMapping("/{email}")
+    public ResponseEntity<User> getUserByEmail (@PathVariable String email){
+        User user = userService.getUserByEmail(email);
+        return new ResponseEntity<>(user,HttpStatus.FOUND);
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();

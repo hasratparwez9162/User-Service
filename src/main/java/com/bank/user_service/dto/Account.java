@@ -11,6 +11,7 @@ public class Account {
     private Long id;                // Account ID (generated in account service)
     private String accountNumber;   // Account number
     private BigDecimal balance;     // Account balance
+    private String accountType;
     private LocalDate dateOpened;   // Date when the account was opened
 
     // User details to pass to account service

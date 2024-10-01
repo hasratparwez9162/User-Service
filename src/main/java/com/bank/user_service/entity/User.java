@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,8 +25,10 @@ public class User {
     private String firstName;
     private String lastName;
     private String gender;
+    private LocalDate dateOfBirth;
     private String address;
     private String state;
+    private String zip;
     @Column(unique = true)
     private String email;
     @Column(unique = true)
@@ -40,4 +44,6 @@ public class User {
     private List<Loan> loans;
     @Transient
     private List<Card> cards;
+    @Transient
+    private String accountType;
 }
