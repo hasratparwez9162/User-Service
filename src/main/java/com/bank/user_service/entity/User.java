@@ -17,7 +17,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "users")
+@Table(name = "users",uniqueConstraints = {
+        @UniqueConstraint(name = "UK_USER_EMAIL", columnNames = "email"),
+        @UniqueConstraint(name = "UK_USER_PHONE_NUMBER", columnNames = "phone_number")
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +32,9 @@ public class User {
     private String address;
     private String state;
     private String zip;
-    @Column(unique = true)
+    @Column(name = "email",unique = true)
     private String email;
-    @Column(unique = true)
+    @Column(name = "phone_number",unique = true)
     private String phoneNumber;
     private String alternatePhoneNumber;
     @CreationTimestamp
