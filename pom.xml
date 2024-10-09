@@ -79,11 +79,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<dependency>
-				<groupId>com.bank.core</groupId>
-				<artifactId>core</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
