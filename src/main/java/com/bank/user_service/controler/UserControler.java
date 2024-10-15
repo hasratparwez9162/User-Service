@@ -4,13 +4,17 @@ package com.bank.user_service.controler;
 import com.bank.user_service.entity.User;
 import com.bank.user_service.external.service.AccountService;
 import com.bank.user_service.serviceImpl.UserServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -24,7 +28,15 @@ public class UserControler {
     AccountService accountService;
 
     @PostMapping("/open-account")
-    public ResponseEntity<User> openAccount(@RequestBody User user){
+    public ResponseEntity<?> openAccount(@RequestBody @Valid User user, BindingResult result){
+        System.out.println("Start Creating Account");
+        if (result.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            result.getFieldErrors().forEach(error -> {
+                errors.put(error.getField(), error.getDefaultMessage());
+            });
+            return ResponseEntity.badRequest().body(errors);
+        }
        User newUser = userService.openAccount(user);
        return  new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }

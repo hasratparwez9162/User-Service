@@ -14,6 +14,8 @@ public class Loan {
     private Long id;
 
     private Long userId;
+    private String loanNumber;
+    private LoanType loanType;
 
     private BigDecimal loanAmount;
 
