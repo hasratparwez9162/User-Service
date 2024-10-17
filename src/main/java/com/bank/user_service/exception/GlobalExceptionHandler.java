@@ -29,12 +29,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(message, HttpStatus.IM_USED);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGenericException(Exception ex) {
-        ArrayList<StackTraceElement> st = new ArrayList<>(List.of(ex.getStackTrace()));
-        logger.error("An error occurred: {}", ex.getMessage(), ex);
-        return new ResponseEntity<>("An error occurred: " + ex.getMessage() + "\n" + st + "\n" + ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<String> handleGenericException(Exception ex) {
+//        ArrayList<StackTraceElement> st = new ArrayList<>(List.of(ex.getStackTrace()));
+//        logger.error("An error occurred: {}", ex.getMessage(), ex);
+//        return new ResponseEntity<>("An error occurred: " + ex.getMessage() + "\n" + st + "\n" + ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 
     public String getMessage(String message) {
         // Define a regular expression to match the duplicate entry message

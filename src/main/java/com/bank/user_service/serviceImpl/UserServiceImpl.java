@@ -126,13 +126,35 @@ public class UserServiceImpl implements UserService {
     public User updateUser(Long id, User userDetails) {
         try {
             User existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-            existingUser.setFirstName(userDetails.getFirstName());
-            existingUser.setLastName(userDetails.getLastName());
-            existingUser.setEmail(userDetails.getEmail());
-            existingUser.setPhoneNumber(userDetails.getPhoneNumber());
-            existingUser.setAlternatePhoneNumber(userDetails.getAlternatePhoneNumber());
-            existingUser.setAddress(userDetails.getAddress());
-            existingUser.setState(userDetails.getState());
+
+            if (userDetails.getFirstName() != null) {
+                existingUser.setFirstName(userDetails.getFirstName());
+            }
+            if (userDetails.getLastName() != null) {
+                existingUser.setLastName(userDetails.getLastName());
+            }
+            if (userDetails.getEmail() != null) {
+                existingUser.setEmail(userDetails.getEmail());
+            }
+            if (userDetails.getPhoneNumber() != null) {
+                existingUser.setPhoneNumber(userDetails.getPhoneNumber());
+            }
+            if (userDetails.getAlternatePhoneNumber() != null) {
+                existingUser.setAlternatePhoneNumber(userDetails.getAlternatePhoneNumber());
+            }
+            if (userDetails.getAddress() != null) {
+                existingUser.setAddress(userDetails.getAddress());
+            }
+            if (userDetails.getState() != null) {
+                existingUser.setState(userDetails.getState());
+            }
+            if (userDetails.getPicturePath() != null) {
+                existingUser.setPicturePath(userDetails.getPicturePath());
+            }
+            if (userDetails.getIdProofPath() != null) {
+                existingUser.setIdProofPath(userDetails.getIdProofPath());
+            }
+
             return userRepository.save(existingUser);
         } catch (Exception e) {
             logger.error("Error updating user: {}", e.getMessage());
