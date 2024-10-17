@@ -20,4 +20,9 @@ public interface AccountService {
     @GetMapping("/account/user-account/{id}")
     List<Account> getAccountById(@PathVariable Long id);
 
+    @GetMapping("/account/details/{accountNumber}")
+    Account getAccountByAccountNumber(@PathVariable String accountNumber);
+
+
+
 }

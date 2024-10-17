@@ -66,4 +66,9 @@ public class UserControler {
         userService.deleteUser(id);
         return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
     }
+    @GetMapping("/account/{accountNumber}")
+    public ResponseEntity<User> getUserByAccountNumber(@PathVariable String accountNumber) {
+        User user = userService.getUserByAccountNumber(accountNumber);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 }
