@@ -1,5 +1,8 @@
 package com.bank.user_service.dto;
 
+import lombok.Data;
+
+@Data
 public class UserRequest {
     private String firstName;
     private String lastName;
@@ -9,5 +12,5 @@ public class UserRequest {
     private String email;
     private String phoneNumber;
     private String alternatePhoneNumber;
-    private String status;
+    private String isActive;
 }

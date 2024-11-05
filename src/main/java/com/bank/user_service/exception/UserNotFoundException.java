@@ -1,8 +1,9 @@
 package com.bank.user_service.exception;
-
+/**
+ * Exception thrown when a user is not found.
+ */
 public class UserNotFoundException extends RuntimeException {
-    public UserNotFoundException() {
-        super();
+    public UserNotFoundException(String message) {
+        super(message);
     }
 }
-

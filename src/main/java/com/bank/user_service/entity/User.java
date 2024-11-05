@@ -1,5 +1,6 @@
 package com.bank.user_service.entity;
 
+import com.bank.core.entity.IsUserActive;
 import com.bank.user_service.dto.Account;
 import com.bank.user_service.dto.Card;
 import com.bank.user_service.dto.Loan;
@@ -30,6 +31,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String applicationId;
 
     // Personal info
     @NotBlank(message = "First name is required.")
@@ -88,12 +91,17 @@ public class User {
 
     @Column(name = "id_proof_path")
     private String idProofPath;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "is_active")
+    private IsUserActive isActive;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
+
+    private String comments;
 
     @Transient
     private List<Account> accounts;
@@ -103,7 +111,9 @@ public class User {
 
     @Transient
     private List<Card> cards;
-
-    @Transient
+    @Column(name = "account_type")
     private String accountType;
+
+
+
 }

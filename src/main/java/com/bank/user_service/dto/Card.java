@@ -34,7 +34,14 @@ public class Card {
     private CardStatus status;  // Enum for ACTIVE, BLOCKED, etc.
 }
 enum CardStatus{
-    ACTIVE, BLOCKED, EXPIRED
+    ACTIVE,          // Card is active and usable
+    BLOCKED,         // Card is blocked
+    EXPIRED,         // Card has passed its expiry date
+    PENDING_ACTIVATION,  // New card waiting to be activated
+    SUSPENDED,       // Temporarily suspended
+    CANCELLED,        // Permanently cancelled
+    PENDING_BLOCK,          // Request to block the card is pending
+    PENDING_UNBLOCK        // Request to unblock the card is pending
 }
 enum CardType{
     DEBIT, CREDIT

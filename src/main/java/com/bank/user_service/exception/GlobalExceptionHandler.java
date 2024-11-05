@@ -16,26 +16,56 @@ public class GlobalExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    /**
+     * Handles UserNotFoundException.
+     * @param ex The exception.
+     * @return A response entity with the error message and HTTP status.
+     */
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException ex) {
         logger.error("User not found: {}", ex.getMessage());
         return new ResponseEntity<>("User Not Found", HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Handles DataIntegrityViolationException.
+     * @param ex The exception.
+     * @return A response entity with the error message and HTTP status.
+     */
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<String> dataIntegrityViolationException(DataIntegrityViolationException ex) {
-        String message = getMessage(ex.getMessage());
+        String message = ex.getMessage();
         logger.error("Data integrity violation: {}", message);
         return new ResponseEntity<>(message, HttpStatus.IM_USED);
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity<String> handleGenericException(Exception ex) {
-//        ArrayList<StackTraceElement> st = new ArrayList<>(List.of(ex.getStackTrace()));
-//        logger.error("An error occurred: {}", ex.getMessage(), ex);
-//        return new ResponseEntity<>("An error occurred: " + ex.getMessage() + "\n" + st + "\n" + ex.getClass(), HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
+    /**
+     * Handles ApplicationNotFoundException.
+     * @param ex The exception.
+     * @return A response entity with the error message and HTTP status.
+     */
+    @ExceptionHandler(ApplicationNotFoundException.class)
+    public ResponseEntity<String> handleApplicationNotFoundException(ApplicationNotFoundException ex) {
+        logger.error("Application not found: {}", ex.getMessage());
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
 
+    /**
+     * Handles OpenAccountException.
+     * @param ex The exception.
+     * @return A response entity with the error message and HTTP status.
+     */
+    @ExceptionHandler(OpenAccountException.class)
+    public ResponseEntity<String> handleOpenAccountException(OpenAccountException ex) {
+        logger.error("Error opening account: {}", ex.getMessage());
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * Extracts a user-friendly message from a DataIntegrityViolationException message.
+     * @param message The original exception message.
+     * @return A user-friendly error message.
+     */
     public String getMessage(String message) {
         // Define a regular expression to match the duplicate entry message
         String regex = "Duplicate entry '([^']*)' for key";
