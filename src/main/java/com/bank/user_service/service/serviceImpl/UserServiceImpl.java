@@ -4,6 +4,7 @@ import com.bank.core.entity.IsUserActive;
 import com.bank.user_service.dto.Account;
 import com.bank.user_service.dto.UpdateUserStatusRequest;
 import com.bank.user_service.entity.User;
+import com.bank.user_service.exception.AccountNotFoundException;
 import com.bank.user_service.exception.ApplicationNotFoundException;
 import com.bank.user_service.exception.OpenAccountException;
 import com.bank.user_service.exception.UserNotFoundException;
@@ -261,7 +262,7 @@ public User getUserByEmail(String email) {
             account = accountService.getAccountByAccountNumber(accountNumber);
         } catch (Exception e) {
             logger.error("Error fetching account: {}", e.getMessage());
-            throw new RuntimeException("Failed to fetch account by account number: " + e.getMessage());
+            throw new AccountNotFoundException("Failed to fetch account by account number: " + e.getMessage());
         }
 
         User user = userRepository.findById(account.getUserId())
